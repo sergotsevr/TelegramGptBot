@@ -1,0 +1,22 @@
+logging:
+  level:
+    ROOT: DEBUG
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+feign:
+  client:
+    config:
+      auth:
+        logger-level: FULL
+#feign:
+#  client:
+#    gpt:
+#      listOfServers: "http://192.168.2.68:3040"
+#    config:
+#      default:
+#        loggerLevel: full
