@@ -2,6 +2,7 @@ package calibri.com.feign;
 
 import calibri.com.config.FeignConfig;
 import calibri.com.dto.ChatGptReq;
+import calibri.com.dto.ChatGptRes;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +34,5 @@ public interface GPTClient {
             value = "/v1/chat/completions",
             produces = "application/json"
     )
-    String sendMessage(@RequestBody ChatGptReq message);
+    ChatGptRes sendMessage(@RequestBody ChatGptReq message);
 }

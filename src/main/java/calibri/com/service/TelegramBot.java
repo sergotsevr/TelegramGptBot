@@ -47,7 +47,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void startCommandReceived(Long chatId, String name) {
 
-        String answer = "Hi, " + name + "Введите сообщение для chatGPT";
+        String answer = "Hi, " + name + " Введите сообщение для chatGPT";
         sendMessage(chatId, answer);
     }
 
