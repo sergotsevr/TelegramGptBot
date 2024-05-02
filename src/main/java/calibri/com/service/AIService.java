@@ -1,7 +1,9 @@
 package calibri.com.service;
 
+import java.util.List;
+
 public interface AIService {
 
-    String getMessage(String message);
-    String getMessage(String message, Role role);
+    List<String> sendMessage(String message);
+    List<String> sendMessage(String message, Role role);
 }
