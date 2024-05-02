@@ -40,7 +40,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
                     break;
                 default:
-                    List<String> response = service.sendMessage(update.getMessage().getText());
+                    List<String> response = service.sendMessage(update.getMessage().getText(), String.valueOf(chatId));
                     response.forEach(text -> sendMessage(chatId, text));
             }
         }

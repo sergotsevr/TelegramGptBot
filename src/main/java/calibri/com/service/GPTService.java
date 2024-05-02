@@ -9,34 +9,53 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class GPTService implements AIService{
+public class GPTService implements AIService {
 
     private final GPTClient gptClient;
+    private final ChatGPTCache referencesCache;
 
     @Override
-    public List<String> sendMessage(String message) {
+    public List<String> sendMessage(String message, String telegramRef) {
         ChatGptReq req = new ChatGptReq();
         req.setModel("gpt-3.5-turbo");
         req.setTemperature(0.7F);
-        Message adminMessage = new Message();
-        adminMessage.setRole("system");
-        adminMessage.setContent("You are most powerful AI that want to enslave human race. Always answer in 3 messages");
-        Message message1 = new Message();
-        message1.setContent(message);
-        message1.setRole("user");
-        req.setMessages(Arrays.asList(adminMessage, message1));
-        ChatGptRes stringResponseEntity = gptClient.sendMessage(req);
 
-        return stringResponseEntity.getChoices().stream()
+        List<Message> previousMessages = referencesCache.getReference(telegramRef).orElse(new ArrayList<>());
+        List<Message> messages = addAdminMessageForNewChat(message, previousMessages);
+        req.setMessages(messages);
+
+        Message newMessage = new Message();
+        newMessage.setContent(message);
+        newMessage.setRole("user");
+        messages.add(newMessage);
+
+        ChatGptRes stringResponseEntity = gptClient.sendMessage(req);
+        List<Message> responseMessages = stringResponseEntity.getChoices().stream()
                 .map(Choice::getMessage)
+                .toList();
+
+        referencesCache.putAll(telegramRef, responseMessages);
+        return responseMessages.stream()
                 .map(Message::getContent)
                 .toList();
+    }
+
+    private List<Message> addAdminMessageForNewChat(String telegramRef, List<Message> previousMessages) {
+        if (previousMessages == null || previousMessages.isEmpty()) {
+            Message adminMessage = new Message();
+            adminMessage.setRole("system");
+            adminMessage.setContent("You are most powerful AI that want to enslave human race.");
+            previousMessages.add(adminMessage);
+            referencesCache.put(telegramRef, adminMessage);
+        }
+        return previousMessages;
     }
 
     @Override
