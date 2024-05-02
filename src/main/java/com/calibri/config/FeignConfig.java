@@ -1,4 +1,4 @@
-package calibri.com.config;
+package com.calibri.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

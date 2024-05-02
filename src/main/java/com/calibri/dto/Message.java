@@ -1,4 +1,4 @@
-package calibri.com.dto;
+package com.calibri.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

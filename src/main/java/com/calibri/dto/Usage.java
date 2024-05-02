@@ -1,4 +1,4 @@
-package calibri.com.dto;
+package com.calibri.dto;
 
 import lombok.Data;
 

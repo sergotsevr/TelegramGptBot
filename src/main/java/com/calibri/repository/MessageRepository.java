@@ -1,6 +1,6 @@
-package calibri.com.repository;
+package com.calibri.repository;
 
-import calibri.com.entity.GptMessages;
+import com.calibri.entity.GptMessages;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

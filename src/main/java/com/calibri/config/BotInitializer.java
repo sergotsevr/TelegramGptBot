@@ -1,6 +1,6 @@
-package calibri.com.config;
+package com.calibri.config;
 
-import calibri.com.service.TelegramBot;
+import com.calibri.service.TelegramBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

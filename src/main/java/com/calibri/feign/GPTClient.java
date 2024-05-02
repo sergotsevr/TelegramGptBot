@@ -1,13 +1,12 @@
-package calibri.com.feign;
+package com.calibri.feign;
 
-import calibri.com.config.FeignConfig;
-import calibri.com.dto.ChatGptReq;
-import calibri.com.dto.ChatGptRes;
+import com.calibri.config.FeignConfig;
+import com.calibri.dto.ChatGptReq;
+import com.calibri.dto.ChatGptRes;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "GPT",
         url = "${feign.client.gpt.listOfServers:http://192.168.2.68:3040}",

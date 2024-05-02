@@ -1,4 +1,4 @@
-package calibri.com.config;
+package com.calibri.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

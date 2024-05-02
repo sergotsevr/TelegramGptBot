@@ -1,9 +1,9 @@
-package calibri.com.service;
+package com.calibri.service;
 
-import calibri.com.dto.Message;
-import calibri.com.entity.GptMessages;
-import calibri.com.mapper.MessageMapper;
-import calibri.com.repository.MessageRepository;
+import com.calibri.dto.Message;
+import com.calibri.entity.GptMessages;
+import com.calibri.mapper.MessageMapper;
+import com.calibri.repository.MessageRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package calibri.com.service;
+package com.calibri.service;
 
 import java.util.List;
 

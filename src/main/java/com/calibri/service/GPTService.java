@@ -1,10 +1,10 @@
-package calibri.com.service;
+package com.calibri.service;
 
-import calibri.com.dto.ChatGptReq;
-import calibri.com.dto.ChatGptRes;
-import calibri.com.dto.Choice;
-import calibri.com.dto.Message;
-import calibri.com.feign.GPTClient;
+import com.calibri.dto.ChatGptReq;
+import com.calibri.dto.ChatGptRes;
+import com.calibri.dto.Choice;
+import com.calibri.dto.Message;
+import com.calibri.feign.GPTClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

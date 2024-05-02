@@ -1,6 +1,6 @@
-package calibri.com.service;
+package com.calibri.service;
 
-import calibri.com.config.BotConfig;
+import com.calibri.config.BotConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
