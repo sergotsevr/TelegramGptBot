@@ -1,6 +1,10 @@
 package calibri.com.service;
 
 import calibri.com.dto.Message;
+import calibri.com.entity.GptMessages;
+import calibri.com.repository.MessageRepository;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,8 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ChatGPTCache {
-
+    private final MessageRepository messageRepository;
     private static final HashMap<String, List<Message>> CHATS = new HashMap<>();
 
     public Optional<List<Message>> getReference(String telegramChatId){
@@ -36,4 +41,8 @@ public class ChatGPTCache {
                 });
     }
 
+    @PostConstruct
+    void initCache(){
+        List<GptMessages> allMessages = messageRepository.findAll();
+    }
 }

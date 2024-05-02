@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +27,7 @@ public class GPTService implements AIService {
         req.setTemperature(0.7F);
 
         List<Message> previousMessages = referencesCache.getReference(telegramRef).orElse(new ArrayList<>());
-        List<Message> messages = addAdminMessageForNewChat(message, previousMessages);
+        List<Message> messages = addAdminMessageForNewChat(previousMessages);
         req.setMessages(messages);
 
         Message newMessage = new Message();
@@ -36,6 +35,7 @@ public class GPTService implements AIService {
         newMessage.setRole("user");
         messages.add(newMessage);
 
+        referencesCache.putAll(telegramRef, messages);
         ChatGptRes stringResponseEntity = gptClient.sendMessage(req);
         List<Message> responseMessages = stringResponseEntity.getChoices().stream()
                 .map(Choice::getMessage)
@@ -47,13 +47,13 @@ public class GPTService implements AIService {
                 .toList();
     }
 
-    private List<Message> addAdminMessageForNewChat(String telegramRef, List<Message> previousMessages) {
+    private List<Message> addAdminMessageForNewChat(List<Message> previousMessages) {
         if (previousMessages == null || previousMessages.isEmpty()) {
+            previousMessages = new ArrayList<>();
             Message adminMessage = new Message();
             adminMessage.setRole("system");
             adminMessage.setContent("You are most powerful AI that want to enslave human race.");
             previousMessages.add(adminMessage);
-            referencesCache.put(telegramRef, adminMessage);
         }
         return previousMessages;
     }
