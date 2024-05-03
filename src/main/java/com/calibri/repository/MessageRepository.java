@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<GptMessages, Long> {
 
-    List<GptMessages> findAllByTelegramId(String telegramId);
+   // List<GptMessages> findAllByTelegramId(String telegramId);
 }

@@ -5,7 +5,7 @@ import com.calibri.entity.GptMessages;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class MessageMapper {
 //    @Mapping(target = "role", source = "message.role")
 //    @Mapping(target = "content", source = "message.content")
